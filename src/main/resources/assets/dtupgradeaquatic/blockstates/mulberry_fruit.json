@@ -1,0 +1,29 @@
+{
+    "multipart": [
+        {   "when": { "age": "0" },
+            "apply": { "model": "dtupgradeaquatic:block/fruit/mulberry_age0" }
+        },
+        {   "when": { "age": "1" },
+            "apply": { "model": "dtupgradeaquatic:block/fruit/mulberry_age1" }
+        },
+        {   "when": { "age": "2" },
+            "apply": { "model": "dtupgradeaquatic:block/fruit/mulberry_age2" }
+        },
+        {   "when": { "age": "3" },
+            "apply": [
+                { "model": "dtupgradeaquatic:block/fruit/mulberry_age3_a" },
+                { "model": "dtupgradeaquatic:block/fruit/mulberry_age3_a", "y": 90 },
+                { "model": "dtupgradeaquatic:block/fruit/mulberry_age3_a", "y": 180 },
+                { "model": "dtupgradeaquatic:block/fruit/mulberry_age3_a", "y": 270 },
+                { "model": "dtupgradeaquatic:block/fruit/mulberry_age3_b" },
+                { "model": "dtupgradeaquatic:block/fruit/mulberry_age3_b", "y": 90 },
+                { "model": "dtupgradeaquatic:block/fruit/mulberry_age3_b", "y": 180 },
+                { "model": "dtupgradeaquatic:block/fruit/mulberry_age3_b", "y": 270 },
+                { "model": "dtupgradeaquatic:block/fruit/mulberry_age3_c" },
+                { "model": "dtupgradeaquatic:block/fruit/mulberry_age3_c", "y": 90 },
+                { "model": "dtupgradeaquatic:block/fruit/mulberry_age3_c", "y": 180 },
+                { "model": "dtupgradeaquatic:block/fruit/mulberry_age3_c", "y": 270 }
+            ]
+        }
+    ]
+}

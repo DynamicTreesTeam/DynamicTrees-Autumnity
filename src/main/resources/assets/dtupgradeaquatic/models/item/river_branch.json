@@ -1,0 +1,7 @@
+{
+  "parent": "dynamictrees:item/branch",
+  "textures": {
+    "bark": "upgrade_aquatic:block/river_log",
+    "rings": "upgrade_aquatic:block/river_log_top"
+  }
+}
