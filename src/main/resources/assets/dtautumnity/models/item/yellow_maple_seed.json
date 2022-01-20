@@ -1,0 +1,6 @@
+{
+    "parent":"dynamictrees:item/standard_seed",
+    "textures": {
+        "layer0":"dtautumnity:item/yellow_maple_seed"
+    }
+}

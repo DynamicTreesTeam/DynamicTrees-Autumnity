@@ -1,0 +1,7 @@
+{
+  "parent": "dynamictrees:item/branch",
+  "textures": {
+    "bark": "autumnity:block/maple_log",
+    "rings": "autumnity:block/maple_log_top"
+  }
+}

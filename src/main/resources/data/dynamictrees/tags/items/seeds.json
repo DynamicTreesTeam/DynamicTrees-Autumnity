@@ -1,6 +1,9 @@
 {
   "replace": false,
   "values": [
-    "dtupgradeaquatic:mulberry_seed"
+    "dtautumnity:maple_seed",
+    "dtautumnity:orange_maple_seed",
+    "dtautumnity:red_maple_seed",
+    "dtautumnity:yellow_maple_seed"
   ]
 }

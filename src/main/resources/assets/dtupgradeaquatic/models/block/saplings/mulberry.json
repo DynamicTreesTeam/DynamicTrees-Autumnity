@@ -1,8 +1,0 @@
-{
-	"parent": "dynamictrees:block/smartmodel/sapling",
-	"textures": {
-		"particle": "upgrade_aquatic:block/river_leaves",
-		"log": "upgrade_aquatic:block/river_log",
-		"leaves": "upgrade_aquatic:block/river_leaves"
-	}
-}

@@ -1,0 +1,7 @@
+{
+  "loader": "dynamictrees:branch",
+  "textures": {
+    "bark": "autumnity:block/stripped_maple_log",
+    "rings": "autumnity:block/stripped_maple_log_top"
+  }
+}

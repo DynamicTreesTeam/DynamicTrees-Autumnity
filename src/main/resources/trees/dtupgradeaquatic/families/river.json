@@ -1,7 +1,0 @@
-{
-  "common_leaves": "dtupgradeaquatic:river",
-  "common_species": "dtupgradeaquatic:mulberry",
-  "primitive_log": "upgrade_aquatic:river_log",
-  "primitive_stripped_log": "upgrade_aquatic:stripped_river_log",
-  "max_branch_radius": 8
-}

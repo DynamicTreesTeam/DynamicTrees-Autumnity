@@ -1,6 +1,9 @@
 {
   "replace": false,
   "values": [
-    "dtupgradeaquatic:river_leaves"
+    "dtautumnity:maple_leaves",
+    "dtautumnity:orange_maple_leaves",
+    "dtautumnity:red_maple_leaves",
+    "dtautumnity:yellow_maple_leaves"
   ]
 }
