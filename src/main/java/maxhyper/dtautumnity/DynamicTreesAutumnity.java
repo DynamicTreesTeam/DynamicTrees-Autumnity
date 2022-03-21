@@ -6,6 +6,7 @@ import com.ferreusveritas.dynamictrees.blocks.leaves.LeavesProperties;
 import com.ferreusveritas.dynamictrees.blocks.rootyblocks.SoilProperties;
 import com.ferreusveritas.dynamictrees.trees.Family;
 import com.ferreusveritas.dynamictrees.trees.Species;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
@@ -66,6 +67,10 @@ public class DynamicTreesAutumnity
                 Species.REGISTRY,
                 LeavesProperties.REGISTRY
         );;
+    }
+
+    public static ResourceLocation resLoc (final String path) {
+        return new ResourceLocation(MOD_ID, path);
     }
 
 }

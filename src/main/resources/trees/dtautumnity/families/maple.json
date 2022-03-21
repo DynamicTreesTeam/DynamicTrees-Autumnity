@@ -1,7 +1,9 @@
 {
+  "type": "dtautumnity:maple",
   "common_leaves": "dtautumnity:maple",
   "common_species": "dtautumnity:maple",
   "primitive_log": "autumnity:maple_log",
   "primitive_stripped_log": "autumnity:stripped_maple_log",
+  "primitive_sappy_log": "autumnity:sappy_maple_log",
   "max_branch_radius": 8
 }

@@ -1,0 +1,41 @@
+[
+  {
+    "__comment": "Cancel standard tree features from the overworld.",
+    "select": { "name": "autumnity.*" },
+    "cancellers": {
+      "type": "tree",
+      "namespace": "minecraft"
+    }
+  },
+  {
+    "select": {
+      "name": "autumnity:maple_forest.*"
+    },
+    "apply": {
+      "species": {
+        "random": {
+          "dtautumnity:maple": 8,
+          "dtautumnity:orange_maple": 2,
+          "dtautumnity:red_maple": 2,
+          "dtautumnity:yellow_maple": 2
+        }
+      },
+      "density": [ 1 ],
+      "chance": 1.0,
+      "forestness" : 1.0
+    }
+  },
+  {
+    "select": { "name": "autumnity:orange_spotted_dark_forest" },
+    "apply": {
+      "species": {
+        "random": {
+          "dark_oak": 5,
+          "dtautumnity:orange_maple": 1
+        }
+      },
+      "density" : { "math": { "div" : [ "noise", 3.0 ] } },
+      "multipass" : true
+    }
+  }
+]
