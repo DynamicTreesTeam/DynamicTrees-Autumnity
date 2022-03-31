@@ -1,42 +1,31 @@
 package maxhyper.dtautumnity;
 
-import com.ferreusveritas.dynamictrees.api.cells.CellKit;
-import net.minecraft.item.Item;
-import net.minecraftforge.event.RegistryEvent;
+import com.ferreusveritas.dynamictrees.DynamicTrees;
+import com.ferreusveritas.dynamictrees.api.registry.TypeRegistryEvent;
+import com.ferreusveritas.dynamictrees.api.worldgen.FeatureCanceller;
+import com.ferreusveritas.dynamictrees.blocks.leaves.LeavesProperties;
+import com.ferreusveritas.dynamictrees.worldgen.cancellers.MushroomFeatureCanceller;
+import maxhyper.dtautumnity.blocks.MapleLeavesProperties;
+import net.minecraft.world.gen.feature.BigMushroomFeatureConfig;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD)
 public class DTAutumnityRegistries {
 
-//    public static FruitBlock MULBERRY_FRUIT = new FruitBlock(){
-//        @Override
-//        protected int fruitDropCount(BlockState state, World world, BlockPos pos) {
-//            return 1 + world.getRandom().nextInt(2);
-//        }
-//    }
-//            .setShape(0, ShapeUtils.createFruitShape(1,1,0, 16))
-//            .setShape(1, ShapeUtils.createFruitShape(2,3,0, 20))
-//            .setShape(2, ShapeUtils.createFruitShape(3.3f,6,1, 20))
-//            .setShape(3, ShapeUtils.createFruitShape(3.3f,6,2, 20))
-//            .setCanBoneMeal(DTConfigs.CAN_BONE_MEAL_APPLE::get);
-
     public static void setup() {
-//        RegistryHandler.addBlock(new ResourceLocation(DynamicTreesAutumnity.MOD_ID, "mulberry_fruit"), MULBERRY_FRUIT);
     }
 
     @SubscribeEvent
-    public static void onItemsRegistry(final RegistryEvent.Register<Item> event) {
-//        Item fruitItem = ForgeRegistries.ITEMS.getValue(new ResourceLocation("upgrade_aquatic","mulberry"));
-//        MULBERRY_FRUIT.setDroppedItem(new ItemStack(fruitItem));
-//        final Species treeSpecies = Species.REGISTRY.get(new ResourceLocation(DynamicTreesAutumnity.MOD_ID, "mulberry"));
-//        if (treeSpecies.isValid())
-//            MULBERRY_FRUIT.setSpecies(treeSpecies);
+    public static void registerLeavesPropertiesTypes(final TypeRegistryEvent<LeavesProperties> event) {
+        event.registerType(DynamicTreesAutumnity.resLoc("maple"), MapleLeavesProperties.TYPE);
     }
 
-    @SubscribeEvent
-    public static void onCellKitRegistry(final com.ferreusveritas.dynamictrees.api.registry.RegistryEvent<CellKit> event) {
-//        DTUpgradeAquaticCellKits.register(event.getRegistry());
-    }
+//    public static final FeatureCanceller AUTUMNITY_TREE_CANCELLER = new MushroomFeatureCanceller<>(DynamicTrees.resLoc("mushroom"), BigMushroomFeatureConfig.class);
+//
+//    @SubscribeEvent
+//    public static void onFeatureCancellerRegistry(final com.ferreusveritas.dynamictrees.api.registry.RegistryEvent<FeatureCanceller> event) {
+//        event.getRegistry().registerAll(AUTUMNITY_TREE_CANCELLER);
+//    }
 
 }

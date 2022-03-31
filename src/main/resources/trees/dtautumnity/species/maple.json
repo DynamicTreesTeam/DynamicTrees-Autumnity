@@ -14,5 +14,19 @@
   "perfect_biomes": { "types": [ "forest", "overworld" ] },
   "primitive_sapling": "autumnity:maple_sapling",
   "features" : [
+    {
+      "name": "biome_predicate",
+      "properties": {
+        "only_world_gen": true,
+        "gen_feature": {
+          "name": "huge_mushrooms",
+          "properties": {
+            "max_mushrooms": 1,
+            "max_attempts": 3
+          }
+        },
+        "biome_predicate": { "name": "autumnity:maple_forest.*" }
+      }
+    }
   ]
 }
