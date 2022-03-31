@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "dtautumnity:stripped_maple_branch"
+    "dtautumnity:stripped_maple_branch",
+    "dtautumnity:sappy_maple_branch"
   ]
 }

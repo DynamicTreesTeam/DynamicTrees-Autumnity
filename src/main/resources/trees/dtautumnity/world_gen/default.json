@@ -85,9 +85,11 @@
   {
     "select": "autumnity:red_spotted_taiga",
     "apply": {
-      "random": {
-        "spruce": 5,
-        "dtautumnity:red_maple": 1
+      "species" : {
+        "random": {
+          "spruce": 5,
+          "dtautumnity:red_maple": 1
+        }
       },
       "density": [ 1 ],
       "chance": 1.0,
