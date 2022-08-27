@@ -15,11 +15,11 @@ import net.minecraftforge.fml.common.Mod;
 @Mod.EventBusSubscriber(modid = DynamicTreesAutumnity.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public final class RegisterJSONAppliers {
 
-
     @SubscribeEvent
     public static void registerAppliersFamily(final ApplierRegistryEvent.Reload<Family, JsonElement> event) {
         registerFamilyAppliers(event.getAppliers());
     }
+
     @SubscribeEvent
     public static void registerAppliersLeavesProperties(final ApplierRegistryEvent.Reload<LeavesProperties, JsonElement> event) {
         registerLeavesPropertiesAppliers(event.getAppliers());
@@ -28,16 +28,24 @@ public final class RegisterJSONAppliers {
 
     public static void registerFamilyAppliers(PropertyAppliers<Family, JsonElement> appliers) {
         appliers.register("primitive_sappy_log", MapleFamily.class, Block.class,
-                MapleFamily::setPrimitiveSappyLog)
+                        MapleFamily::setPrimitiveSappyLog)
                 .register("sappy_branch_chance", MapleFamily.class, Float.class,
                         MapleFamily::setSappyBranchChance);
     }
+
     public static void registerLeavesPropertiesAppliers(PropertyAppliers<LeavesProperties, JsonElement> appliers) {
 //        appliers.register("color", MapleLeavesProperties.class, Integer.class,
 //                        MapleLeavesProperties::setLeafColor);
     }
 
-    @SubscribeEvent public static void registerAppliersFamily(final ApplierRegistryEvent.GatherData<Family, JsonElement> event) { registerFamilyAppliers(event.getAppliers()); }
-    @SubscribeEvent public static void registerAppliersLeavesProperties(final ApplierRegistryEvent.GatherData<LeavesProperties, JsonElement> event) { registerLeavesPropertiesAppliers(event.getAppliers()); }
+    @SubscribeEvent
+    public static void registerAppliersFamily(final ApplierRegistryEvent.GatherData<Family, JsonElement> event) {
+        registerFamilyAppliers(event.getAppliers());
+    }
+
+    @SubscribeEvent
+    public static void registerAppliersLeavesProperties(final ApplierRegistryEvent.GatherData<LeavesProperties, JsonElement> event) {
+        registerLeavesPropertiesAppliers(event.getAppliers());
+    }
 
 }

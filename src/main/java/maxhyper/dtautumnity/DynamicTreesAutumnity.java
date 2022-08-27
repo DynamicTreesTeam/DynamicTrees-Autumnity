@@ -2,10 +2,6 @@ package maxhyper.dtautumnity;
 
 import com.ferreusveritas.dynamictrees.api.GatherDataHelper;
 import com.ferreusveritas.dynamictrees.api.registry.RegistryHandler;
-import com.ferreusveritas.dynamictrees.blocks.leaves.LeavesProperties;
-import com.ferreusveritas.dynamictrees.blocks.rootyblocks.SoilProperties;
-import com.ferreusveritas.dynamictrees.trees.Family;
-import com.ferreusveritas.dynamictrees.trees.Species;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -17,8 +13,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(DynamicTreesAutumnity.MOD_ID)
-public class DynamicTreesAutumnity
-{
+public class DynamicTreesAutumnity {
     public static final String MOD_ID = "dtautumnity";
 
     public DynamicTreesAutumnity() {
@@ -59,17 +54,11 @@ public class DynamicTreesAutumnity
     }
 
     public void gatherData(final GatherDataEvent event) {
-        GatherDataHelper.gatherAllData(
-                MOD_ID,
-                event,
-                SoilProperties.REGISTRY,
-                Family.REGISTRY,
-                Species.REGISTRY,
-                LeavesProperties.REGISTRY
-        );;
+        GatherDataHelper.gatherTagData(MOD_ID, event);
+        GatherDataHelper.gatherLootData(MOD_ID, event);
     }
 
-    public static ResourceLocation resLoc (final String path) {
+    public static ResourceLocation resLoc(final String path) {
         return new ResourceLocation(MOD_ID, path);
     }
 

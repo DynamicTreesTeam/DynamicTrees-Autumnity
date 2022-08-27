@@ -7,11 +7,11 @@ import maxhyper.dtautumnity.trees.MapleFamily;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-@Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 public class DTAutumnityRegistries {
 
     @SubscribeEvent
-    public static void registerFamilyTypes (final TypeRegistryEvent<Family> event) {
+    public static void registerFamilyTypes(final TypeRegistryEvent<Family> event) {
         event.registerType(DynamicTreesAutumnity.resLoc("maple"), MapleFamily.TYPE);
     }
 

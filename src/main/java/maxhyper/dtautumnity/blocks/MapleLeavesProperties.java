@@ -24,21 +24,21 @@ public class MapleLeavesProperties extends LeavesProperties {
 
     @Override
     protected DynamicLeavesBlock createDynamicLeaves(final AbstractBlock.Properties properties) {
-        return new DynamicLeavesBlock(this, properties){
+        return new DynamicLeavesBlock(this, properties) {
             @OnlyIn(Dist.CLIENT)
-            public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
-                super.animateTick(stateIn, worldIn, pos, rand);
-                if (rand.nextInt(100) == 0) {
+            public void animateTick(BlockState state, World world, BlockPos pos, Random random) {
+                super.animateTick(state, world, pos, random);
+                if (random.nextInt(100) == 0) {
                     BlockPos downPos = pos.below();
-                    if (worldIn.isEmptyBlock(downPos)) {
-                        int color = colorNumber == null ? properties.foliageColorMultiplier(stateIn, worldIn, pos) : colorNumber;
-                        double d0 = ((float)(color >> 16 & 255) / 255.0F);
-                        double d1 = ((float)(color >> 8 & 255) / 255.0F);
-                        double d2 = ((float)(color & 255) / 255.0F);
-                        double d3 = ((float)pos.getX() + rand.nextFloat());
-                        double d4 = (double)pos.getY() - 0.05D;
-                        double d6 = ((float)pos.getZ() + rand.nextFloat());
-                        worldIn.addParticle(AutumnityParticles.FALLING_MAPLE_LEAF.get(), d3, d4, d6, d0, d1, d2);
+                    if (world.isEmptyBlock(downPos)) {
+                        int color = colorNumber == null ? properties.foliageColorMultiplier(state, world, pos) : colorNumber;
+                        double d0 = ((float) (color >> 16 & 255) / 255.0F);
+                        double d1 = ((float) (color >> 8 & 255) / 255.0F);
+                        double d2 = ((float) (color & 255) / 255.0F);
+                        double d3 = ((float) pos.getX() + random.nextFloat());
+                        double d4 = (double) pos.getY() - 0.05D;
+                        double d6 = ((float) pos.getZ() + random.nextFloat());
+                        world.addParticle(AutumnityParticles.FALLING_MAPLE_LEAF.get(), d3, d4, d6, d0, d1, d2);
                     }
                 }
 

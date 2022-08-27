@@ -11,7 +11,6 @@ import com.ferreusveritas.dynamictrees.util.Optionals;
 import com.minecraftabnormals.autumnity.core.registry.AutumnityItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.RotatedPillarBlock;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.player.PlayerEntity;
@@ -19,12 +18,13 @@ import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.util.*;
+import net.minecraft.util.Hand;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.World;
 
-import javax.annotation.Nullable;
 import java.util.Optional;
 
 public class MapleFamily extends Family {
@@ -43,7 +43,7 @@ public class MapleFamily extends Family {
         super.setupBlocks();
 
         this.altStrippedBranchBlock = setupBranch(
-                createBranch(getBranchRegName("sappy_")),
+                createBranch(getBranchName("sappy_")),
                 false
         );
     }
@@ -57,24 +57,26 @@ public class MapleFamily extends Family {
         return Optionals.ofBlock(altStrippedBranchBlock);
     }
 
-    public float getSappyBranchChance (ItemStack heldStack){
+    public float getSappyBranchChance(ItemStack heldStack) {
         int i = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.BLOCK_FORTUNE, heldStack);
-        return 1 - 1f / ((float)i * (1/3f) + (1/(1-sappyBranchChance)));
+        return 1 - 1f / ((float) i * (1 / 3f) + (1 / (1 - sappyBranchChance)));
     }
+
     public void setSappyBranchChance(Float chance) {
         sappyBranchChance = chance;
     }
 
-    protected BranchBlock createBranchBlock() {
-        final BasicBranchBlock branch = new BasicBranchBlock(this.getProperties()){
+    @Override
+    protected BranchBlock createBranchBlock(ResourceLocation name) {
+        final BasicBranchBlock branch = new BasicBranchBlock(name, this.getProperties()) {
             @Override
             public void stripBranch(BlockState state, World world, BlockPos pos, PlayerEntity player, ItemStack heldItem) {
                 final int radius = this.getRadius(state);
-                this.damageAxe(player, heldItem, radius / 2, new NetVolumeNode.Volume((radius * radius * 64) / 2), false);
+                this.damageTool(player, heldItem, radius / 2, new NetVolumeNode.Volume((radius * radius * 64) / 2), false);
 
-                if (!world.isClientSide()){
+                if (!world.isClientSide()) {
                     Family fam = this.getFamily();
-                    if (fam instanceof MapleFamily){
+                    if (fam instanceof MapleFamily) {
                         MapleFamily mapleFam = (MapleFamily) fam;
                         Optional<BranchBlock> stripBranch = (world.getRandom().nextFloat() < mapleFam.getSappyBranchChance(heldItem)) ? mapleFam.getSappyBranch() : mapleFam.getStrippedBranch();
                         stripBranch.ifPresent(strippedBranch ->
@@ -93,11 +95,12 @@ public class MapleFamily extends Family {
         return branch;
     }
 
-    public boolean onTreeActivated(World world, BlockPos hitPos, BlockState state, PlayerEntity player, Hand hand, @Nullable ItemStack heldItem, BlockRayTraceResult hit) {
-        if (TreeHelper.getBranch(state) == altStrippedBranchBlock){
-            collectSap(world, hitPos, player, hand);
+    @Override
+    public boolean onTreeActivated(TreeActivationContext context) {
+        if (TreeHelper.getBranch(context.hitState) == altStrippedBranchBlock) {
+            collectSap(context.world, context.hitPos, context.player, context.hand);
         }
-        return super.onTreeActivated(world, hitPos, state, player, hand, heldItem, hit);
+        return super.onTreeActivated(context);
     }
 
     public void collectSap(World worldIn, BlockPos pos, PlayerEntity player, Hand handIn) {
@@ -119,7 +122,7 @@ public class MapleFamily extends Family {
                     else if (!player.inventory.add(itemstack2))
                         player.drop(itemstack2, false);
                     else if (player instanceof ServerPlayerEntity)
-                        ((ServerPlayerEntity)player).refreshContainer(player.inventoryMenu);
+                        ((ServerPlayerEntity) player).refreshContainer(player.inventoryMenu);
                 }
 
                 worldIn.playSound(null, pos, SoundEvents.BOTTLE_FILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
