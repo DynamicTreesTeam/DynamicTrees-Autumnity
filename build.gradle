@@ -1,5 +1,3 @@
-import org.w3c.dom.Element
-
 String property(String name) {
     return project.getProperty(name)
 }
@@ -109,7 +107,10 @@ minecraft {
             property 'mixin.env.remapRefMap', 'true'
             property 'mixin.env.refMapRemappingFile', "${buildDir}/createSrgToMcp/output.srg"
 
-            args '--mod', 'dtautumnity', '--all', '--output', file('src/generated/resources/')
+            args '--mod', 'dtautumnity',
+                    '--all',
+                    '--output', file('src/generated/resources/'),
+                    '--existing', file('src/main/resources')
 
             mods {
                 dtautumnity {
@@ -120,34 +121,28 @@ minecraft {
     }
 }
 
+sourceSets.main.resources {
+    srcDir("src/generated/resources")
+}
+
 dependencies {
-    // Not sure if we need this one, what is a "forge" anyway?
     minecraft "net.minecraftforge:forge:${mcVersion}-${property("forgeVersion")}"
 
-    // Compile Hwyla API, but don't include in runtime.
-    compileOnly fg.deobf("mcp.mobius.waila:Hwyla:${property("hwylaVersion")}:api")
-    // At runtime, use the full Hwyla mod.
-    runtimeOnly fg.deobf("mcp.mobius.waila:Hwyla:${property("hwylaVersion")}")
+    implementation(fg.deobf("curse.maven:hwyla-253449:3033593"))
 
-    // Compile JEI API, but don't include in runtime.
     compileOnly fg.deobf("mezz.jei:jei-${mcVersion}:${property("jeiVersion")}:api")
-    // At runtime, use the full JEI mod.
     runtimeOnly fg.deobf("mezz.jei:jei-${mcVersion}:${property("jeiVersion")}")
 
-    // At runtime, use Patchouli mod (for the guide book, which is Json so we don't need the API).
     runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:${property("patchouliVersion")}")
 
-    // Compile Dynamic Trees, of course.
     implementation fg.deobf("com.ferreusveritas.dynamictrees:DynamicTrees-${mcVersion}:${property("dynamicTreesVersion")}")
-    // Compile Dynamic Trees Plus
     runtimeOnly fg.deobf("com.ferreusveritas.dynamictreesplus:DynamicTreesPlus-${mcVersion}:${property("dynamicTreesPlusVersion")}")
 
-    implementation fg.deobf("curse.maven:abnormals-core-382216:3351059")
+    implementation fg.deobf("curse.maven:abnormals-core-382216:3607198") // Note: now called Blueprint in newer versions
     implementation fg.deobf("curse.maven:autumnity-365045:3553317")
 
     runtimeOnly fg.deobf("curse.maven:cc-tweaked-282001:3236650")
 
-    // At runtime, use suggestion provider fix mod.
     runtimeOnly fg.deobf("com.harleyoconnor.suggestionproviderfix:SuggestionProviderFix:${mcVersion}-${property("suggestionProviderFixVersion")}")
 }
 
@@ -183,35 +178,7 @@ tasks.withType(GenerateModuleMetadata) {
 publishing {
     publications {
         mavenJava(MavenPublication) {
-            setArtifactId("${modName}-${mcVersion}")
-            setVersion(modVersion)
-
             from components.java
-
-            pom {
-                url = "https://github.com/supermassimo/${modName}"
-                licenses {
-                    license {
-                        name = 'MIT'
-                        url = 'https://mit-license.org'
-                    }
-                }
-                scm {
-                    connection = "scm:git:git://github.com/supermassimo/${modName}.git"
-                    developerConnection = "scm:git:ssh://github.com/supermassimo/${modName}.git"
-                    url = "https://github.com/supermassimo/${modName}"
-                }
-            }
-
-            pom.withXml { xmlProvider ->
-                final Element element = xmlProvider.asElement();
-
-                // Clear dependencies.
-                element.getChildNodes().each { node ->
-                    if (node.getNodeName() == "dependencies")
-                        element.removeChild(node)
-                }
-            }
         }
     }
     repositories {
