@@ -1,5 +1,5 @@
 modLoader="javafml"
-loaderVersion="[36,)"
+loaderVersion="[36,37)"
 license="MIT"
 issueTrackerURL="https://github.com/DynamicTreesTeam/DynamicTrees-Autumnity/issues"
 
@@ -7,14 +7,13 @@ issueTrackerURL="https://github.com/DynamicTreesTeam/DynamicTrees-Autumnity/issu
 modId="dtautumnity"
 version="${file.jarVersion}"
 displayName="Dynamic Trees for Autumnity"
-
 updateJSONURL="https://github.com/DynamicTreesTeam/DynamicTreesVersionInfo/blob/master/Add-ons/Autumnity.json?raw=true"
 displayURL="https://www.curseforge.com/minecraft/mc-mods/dynamic-trees-autumnity"
-
 authors="Max Hyper"
 description='''
 Compatibility Mod between Dynamic trees and Autumnity
 '''
+
 [[dependencies.dtautumnity]]
     modId="forge"
     mandatory=true
