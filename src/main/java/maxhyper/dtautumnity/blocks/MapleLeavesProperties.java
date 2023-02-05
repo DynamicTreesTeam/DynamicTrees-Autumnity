@@ -1,14 +1,14 @@
 package maxhyper.dtautumnity.blocks;
 
 import com.ferreusveritas.dynamictrees.api.registry.TypedRegistry;
-import com.ferreusveritas.dynamictrees.blocks.leaves.DynamicLeavesBlock;
-import com.ferreusveritas.dynamictrees.blocks.leaves.LeavesProperties;
-import com.minecraftabnormals.autumnity.core.registry.AutumnityParticles;
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.BlockState;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import com.ferreusveritas.dynamictrees.block.leaves.DynamicLeavesBlock;
+import com.ferreusveritas.dynamictrees.block.leaves.LeavesProperties;
+import com.teamabnormals.autumnity.core.registry.AutumnityParticleTypes;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -23,10 +23,10 @@ public class MapleLeavesProperties extends LeavesProperties {
     }
 
     @Override
-    protected DynamicLeavesBlock createDynamicLeaves(final AbstractBlock.Properties properties) {
+    protected DynamicLeavesBlock createDynamicLeaves(final BlockBehaviour.Properties properties) {
         return new DynamicLeavesBlock(this, properties) {
             @OnlyIn(Dist.CLIENT)
-            public void animateTick(BlockState state, World world, BlockPos pos, Random random) {
+            public void animateTick(BlockState state, Level world, BlockPos pos, Random random) {
                 super.animateTick(state, world, pos, random);
                 if (random.nextInt(100) == 0) {
                     BlockPos downPos = pos.below();
@@ -38,7 +38,7 @@ public class MapleLeavesProperties extends LeavesProperties {
                         double d3 = ((float) pos.getX() + random.nextFloat());
                         double d4 = (double) pos.getY() - 0.05D;
                         double d6 = ((float) pos.getZ() + random.nextFloat());
-                        world.addParticle(AutumnityParticles.FALLING_MAPLE_LEAF.get(), d3, d4, d6, d0, d1, d2);
+                        world.addParticle(AutumnityParticleTypes.FALLING_MAPLE_LEAF.get(), d3, d4, d6, d0, d1, d2);
                     }
                 }
 

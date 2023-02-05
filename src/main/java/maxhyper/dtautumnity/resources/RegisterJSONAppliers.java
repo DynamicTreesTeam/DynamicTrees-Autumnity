@@ -1,14 +1,14 @@
 package maxhyper.dtautumnity.resources;
 
-import com.ferreusveritas.dynamictrees.api.treepacks.ApplierRegistryEvent;
-import com.ferreusveritas.dynamictrees.blocks.leaves.LeavesProperties;
+import com.ferreusveritas.dynamictrees.api.applier.ApplierRegistryEvent;
+import com.ferreusveritas.dynamictrees.block.leaves.LeavesProperties;
 import com.ferreusveritas.dynamictrees.deserialisation.PropertyAppliers;
-import com.ferreusveritas.dynamictrees.trees.Family;
+import com.ferreusveritas.dynamictrees.tree.family.Family;
 import com.google.gson.JsonElement;
 import maxhyper.dtautumnity.DynamicTreesAutumnity;
 import maxhyper.dtautumnity.blocks.MapleLeavesProperties;
 import maxhyper.dtautumnity.trees.MapleFamily;
-import net.minecraft.block.Block;
+import net.minecraft.world.level.block.Block;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 

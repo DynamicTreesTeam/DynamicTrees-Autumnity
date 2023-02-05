@@ -2,33 +2,33 @@ package maxhyper.dtautumnity.trees;
 
 import com.ferreusveritas.dynamictrees.api.TreeHelper;
 import com.ferreusveritas.dynamictrees.api.registry.TypedRegistry;
-import com.ferreusveritas.dynamictrees.blocks.branches.BasicBranchBlock;
-import com.ferreusveritas.dynamictrees.blocks.branches.BranchBlock;
+import com.ferreusveritas.dynamictrees.block.branch.BasicBranchBlock;
+import com.ferreusveritas.dynamictrees.block.branch.BranchBlock;
 import com.ferreusveritas.dynamictrees.init.DTConfigs;
-import com.ferreusveritas.dynamictrees.systems.nodemappers.NetVolumeNode;
-import com.ferreusveritas.dynamictrees.trees.Family;
+import com.ferreusveritas.dynamictrees.systems.nodemapper.NetVolumeNode;
+import com.ferreusveritas.dynamictrees.tree.family.Family;
 import com.ferreusveritas.dynamictrees.util.Optionals;
-import com.minecraftabnormals.autumnity.core.registry.AutumnityItems;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.enchantment.Enchantments;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.util.Hand;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvents;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import com.teamabnormals.autumnity.core.registry.AutumnityItems;
+
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.player.Player;
 
 import java.util.Optional;
 
 public class MapleFamily extends Family {
-
     public static final TypedRegistry.EntryType<Family> TYPE = TypedRegistry.newType(MapleFamily::new);
 
     protected BranchBlock altStrippedBranchBlock;
@@ -45,7 +45,7 @@ public class MapleFamily extends Family {
         this.altStrippedBranchBlock = setupBranch(
                 createBranch(getBranchName("sappy_")),
                 false
-        );
+        ).get();
     }
 
     public Family setPrimitiveSappyLog(Block primitiveLog) {
@@ -70,9 +70,9 @@ public class MapleFamily extends Family {
     protected BranchBlock createBranchBlock(ResourceLocation name) {
         final BasicBranchBlock branch = new BasicBranchBlock(name, this.getProperties()) {
             @Override
-            public void stripBranch(BlockState state, World world, BlockPos pos, PlayerEntity player, ItemStack heldItem) {
+            public void stripBranch(BlockState state, Level world, BlockPos pos, Player player, ItemStack heldItem) {
                 final int radius = this.getRadius(state);
-                this.damageTool(player, heldItem, radius / 2, new NetVolumeNode.Volume((radius * radius * 64) / 2), false);
+                this.damageAxe(player, heldItem, radius / 2, new NetVolumeNode.Volume((radius * radius * 64) / 2), false);
 
                 if (!world.isClientSide()) {
                     Family fam = this.getFamily();
@@ -98,12 +98,12 @@ public class MapleFamily extends Family {
     @Override
     public boolean onTreeActivated(TreeActivationContext context) {
         if (TreeHelper.getBranch(context.hitState) == altStrippedBranchBlock) {
-            collectSap(context.world, context.hitPos, context.player, context.hand);
+            collectSap(context.level, context.hitPos, context.player, context.hand);
         }
         return super.onTreeActivated(context);
     }
 
-    public void collectSap(World worldIn, BlockPos pos, PlayerEntity player, Hand handIn) {
+    public void collectSap(Level worldIn, BlockPos pos, Player player, InteractionHand handIn) {
         ItemStack itemstack = player.getItemInHand(handIn);
         BranchBlock strippedBranch = getStrippedBranch().orElse(null);
         int radius = TreeHelper.getRadius(worldIn, pos);
@@ -114,18 +114,18 @@ public class MapleFamily extends Family {
         Item item = itemstack.getItem();
         if (item == Items.GLASS_BOTTLE) {
             if (!worldIn.isClientSide) {
-                if (!player.abilities.instabuild) {
+                if (!player.getAbilities().instabuild) {
                     ItemStack itemstack2 = new ItemStack(AutumnityItems.SAP_BOTTLE.get());
                     itemstack.shrink(1);
                     if (itemstack.isEmpty())
                         player.setItemInHand(handIn, itemstack2);
-                    else if (!player.inventory.add(itemstack2))
+                    else if (!player.getInventory().add(itemstack2))
                         player.drop(itemstack2, false);
-                    else if (player instanceof ServerPlayerEntity)
-                        ((ServerPlayerEntity) player).refreshContainer(player.inventoryMenu);
+                    else if (player instanceof ServerPlayer)
+                        ((ServerPlayer) player).inventoryMenu.sendAllDataToRemote();
                 }
 
-                worldIn.playSound(null, pos, SoundEvents.BOTTLE_FILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
+                worldIn.playSound(null, pos, SoundEvents.BOTTLE_FILL, SoundSource.BLOCKS, 1.0F, 1.0F);
                 strippedBranch.setRadius(worldIn, pos, radius, null, 11);
             } else {
                 player.swing(handIn);
