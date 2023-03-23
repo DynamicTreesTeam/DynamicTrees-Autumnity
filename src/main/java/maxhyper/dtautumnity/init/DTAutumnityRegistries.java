@@ -1,7 +1,7 @@
 package maxhyper.dtautumnity.init;
 
 import com.ferreusveritas.dynamictrees.api.registry.TypeRegistryEvent;
-import com.ferreusveritas.dynamictrees.trees.Family;
+import com.ferreusveritas.dynamictrees.tree.family.Family;
 import maxhyper.dtautumnity.DynamicTreesAutumnity;
 import maxhyper.dtautumnity.trees.MapleFamily;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
