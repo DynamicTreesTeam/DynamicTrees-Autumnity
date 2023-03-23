@@ -9,7 +9,7 @@ version="${file.jarVersion}"
 displayName="Dynamic Trees for Autumnity"
 updateJSONURL="https://github.com/DynamicTreesTeam/DynamicTreesVersionInfo/blob/master/Add-ons/Autumnity.json?raw=true"
 displayURL="https://www.curseforge.com/minecraft/mc-mods/dynamic-trees-autumnity"
-authors="Max Hyper"
+authors="Max Hyper, OrangeBurrito"
 description='''
 Compatibility Mod between Dynamic trees and Autumnity
 '''
