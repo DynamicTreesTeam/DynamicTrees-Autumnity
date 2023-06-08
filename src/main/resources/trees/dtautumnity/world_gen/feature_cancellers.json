@@ -1,0 +1,10 @@
+[
+  {
+    "__comment": "Cancel standard tree features from autumnity biomes",
+    "select": { "name" : "autumnity:.*" },
+    "cancellers": {
+      "types": ["tree", "mushroom" ],
+      "namespaces": [ "minecraft", "autumnity" ]
+    }
+  }
+]

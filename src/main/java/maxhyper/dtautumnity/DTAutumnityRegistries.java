@@ -17,11 +17,4 @@ public class DTAutumnityRegistries {
         event.registerType(DynamicTreesAutumnity.resLoc("maple"), MapleLeavesProperties.TYPE);
     }
 
-//    public static final FeatureCanceller AUTUMNITY_TREE_CANCELLER = new MushroomFeatureCanceller<>(DynamicTrees.resLoc("mushroom"), BigMushroomFeatureConfig.class);
-//
-//    @SubscribeEvent
-//    public static void onFeatureCancellerRegistry(final com.ferreusveritas.dynamictrees.api.registry.RegistryEvent<FeatureCanceller> event) {
-//        event.getRegistry().registerAll(AUTUMNITY_TREE_CANCELLER);
-//    }
-
 }

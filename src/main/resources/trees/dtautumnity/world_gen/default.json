@@ -1,13 +1,5 @@
 [
   {
-    "__comment": "Cancel standard tree features from autumnity biomes. and cancel maple trees from vanilla biomes",
-    "select": { "names_or" : [ "autumnity.*", "minecraft:flower_forest", "minecraft:forest", "minecraft:wooded_hills"] },
-    "cancellers": {
-      "type": "tree",
-      "namespaces": [ "minecraft", "autumnity" ]
-    }
-  },
-  {
     "select": { "names_or" : ["minecraft:flower_forest", "minecraft:forest", "minecraft:wooded_hills"] },
     "apply": {
       "species" : {
@@ -20,12 +12,53 @@
     }
   },
   {
+    "select": { "name" : "minecraft:taiga" },
+    "apply": {
+      "species" : {
+        "method" : "splice_before",
+        "random" : {
+          "dtautumnity:red_maple" : 1,
+          "..." : 20
+        }
+      }
+    }
+  },
+  {
+    "select": { "name" : "minecraft:dark_forest" },
+    "apply": {
+      "species" : {
+        "method" : "splice_before",
+        "random" : {
+          "dtautumnity:orange_maple" : 1,
+          "..." : 30
+        }
+      }
+    }
+  },
+  {
+    "select": { "name" : "minecraft:forest" },
+    "apply": {
+      "species" : {
+        "method" : "splice_before",
+        "random" : {
+          "dtautumnity:yellow_maple" : 1,
+          "..." : 20
+        }
+      }
+    }
+  },
+
+
+
+  {
     "select": {
-      "name": "autumnity:maple_forest.*"
+      "name": "autumnity:maple_forest"
     },
     "apply": {
       "species": {
         "random": {
+          "red_mushroom" : 1,
+          "brown_mushroom" : 1,
           "dtautumnity:maple": 8,
           "dtautumnity:orange_maple": 2,
           "dtautumnity:red_maple": 2,
@@ -38,11 +71,30 @@
     }
   },
   {
+    "only_if_loaded": "dynamictreesplus",
+    "select": "autumnity:maple_forest",
+    "apply": {
+      "species" : {
+        "random": {
+          "dynamictreesplus:red_mushroom" : 1,
+          "dynamictreesplus:brown_mushroom" : 1,
+          "dtautumnity:maple": 8,
+          "dtautumnity:orange_maple": 2,
+          "dtautumnity:red_maple": 2,
+          "dtautumnity:yellow_maple": 2
+        }
+      }
+    }
+  },
+
+
+  {
     "select": "autumnity:pumpkin_fields",
     "apply": {
       "species" : {
         "random" : {
-          "red_mushroom": 2,
+          "red_mushroom" : 1,
+          "brown_mushroom" : 1,
           "dtautumnity:maple": 3,
           "dtautumnity:orange_maple": 3,
           "dtautumnity:red_maple": 3,
@@ -50,50 +102,23 @@
         }
       },
       "density": [ 0.2 ],
-      "chance": 0.2
+      "chance": 0.3
     }
   },
   {
-    "select": "autumnity:yellow_spotted_forest",
+    "only_if_loaded": "dynamictreesplus",
+    "select": "autumnity:pumpkin_fields",
     "apply": {
       "species" : {
         "random" : {
-          "oak" : 4,
-          "birch" : 1,
-          "dtautumnity:yellow_maple" : 1
+          "dynamictreesplus:red_mushroom" : 1,
+          "dynamictreesplus:brown_mushroom" : 1,
+          "dtautumnity:maple": 3,
+          "dtautumnity:orange_maple": 3,
+          "dtautumnity:red_maple": 3,
+          "dtautumnity:yellow_maple": 3
         }
-      },
-      "density": [ 1 ],
-      "chance": 1.0,
-      "forestness" : 1.0
-    }
-  },
-  {
-    "select": "autumnity:orange_spotted_dark_forest",
-    "apply": {
-      "species": {
-        "random": {
-          "dark_oak": 5,
-          "dtautumnity:orange_maple": 1
-        }
-      },
-      "density" : { "math": { "div" : [ "noise", 3.0 ] } },
-      "chance": 1.0,
-      "multipass" : true
-    }
-  },
-  {
-    "select": "autumnity:red_spotted_taiga",
-    "apply": {
-      "species" : {
-        "random": {
-          "spruce": 5,
-          "dtautumnity:red_maple": 1
-        }
-      },
-      "density": [ 1 ],
-      "chance": 1.0,
-      "forestness" : 1.0
+      }
     }
   }
 ]
